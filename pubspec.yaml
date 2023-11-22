@@ -16,6 +16,8 @@ dependencies:
   permission_handler: ^11.0.1
   video_player: ^2.8.1
   chewie: ^1.7.1
+  device_info_plus: ^9.1.1
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

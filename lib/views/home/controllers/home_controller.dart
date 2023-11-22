@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   bool isLoading = false;
   getData() async {
     data = PinterestModel();
+    hasError = false;
     isLoading = true;
     update();
     await _fetchData.fetchData(url.text);
@@ -25,9 +26,16 @@ class HomeController extends GetxController {
     );
   }
 
+  bool hasError = false;
+  changeError(bool value) {
+    hasError = value;
+    update();
+  }
+
   bool isDownloading = false;
   double progress = 0.0;
   downloadVideo(context) async {
+    cancelToken = CancelToken();
     progress = 0.0;
     update();
     isDownloading = true;
@@ -38,6 +46,7 @@ class HomeController extends GetxController {
     await Dio().download(
       data.video.toString(),
       "${path.path}$fileName",
+      cancelToken: cancelToken,
       onReceiveProgress: (count, total) {
         progress = count / total;
         update();
@@ -48,9 +57,12 @@ class HomeController extends GetxController {
           content: Text("File has been Downloaded Successfully"),
         ),
       );
-      Get.offAll(
-        () => const HomeView(),
-      );
+      url.text = "";
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeView(),
+          ));
     }).catchError((err) {
       debugPrint(err.toString());
     });
@@ -58,7 +70,17 @@ class HomeController extends GetxController {
     update();
   }
 
+  CancelToken cancelToken = CancelToken();
+  cancelDownload() {
+    print("download cancel");
+
+    cancelToken.cancel();
+    isDownloading = false;
+    update();
+  }
+
   downloadImage(context) async {
+    cancelToken = CancelToken();
     progress = 0.0;
     update();
     isDownloading = true;
@@ -69,6 +91,7 @@ class HomeController extends GetxController {
     await Dio().download(
       data.thumbnail!.url.toString(),
       "${path.path}$fileName",
+      cancelToken: cancelToken,
       onReceiveProgress: (count, total) {
         progress = count / total;
         update();
@@ -79,9 +102,12 @@ class HomeController extends GetxController {
           content: Text("File has been Downloaded Successfully"),
         ),
       );
-      Get.offAll(
-        () => const HomeView(),
-      );
+      url.text = "";
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeView(),
+          ));
     }).catchError((err) {
       debugPrint(err.toString());
     });

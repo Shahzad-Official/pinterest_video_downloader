@@ -1,12 +1,15 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pinterest_video_downloader/constants/app_spacing.dart';
 import 'package:pinterest_video_downloader/views/about_us/about_us.dart';
 import 'package:pinterest_video_downloader/views/contact_us/contact_us.dart';
 import 'package:pinterest_video_downloader/views/home/views/download_tab.dart';
 import 'package:pinterest_video_downloader/views/home/views/saved.dart';
+import 'package:pinterest_video_downloader/widgets/app_text.dart';
 
-Permission permission = Permission.manageExternalStorage;
+Permission permission = Permission.storage;
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -16,7 +19,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
+  final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   late TabController _tabController;
+
+  getDeviceInfo() async {
+    AndroidDeviceInfo androidDeviceInfo = await _deviceInfoPlugin.androidInfo;
+    print(androidDeviceInfo.id);
+  }
 
   @override
   void initState() {
@@ -25,6 +34,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       vsync: this,
     );
     Permission.manageExternalStorage.request();
+    getDeviceInfo();
     super.initState();
   }
 
@@ -33,7 +43,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Pinterest Downloader"),
+        title: const AppText(text: "Pinterest Downloader"),
         actions: [
           PopupMenuButton(
             itemBuilder: (context) {
@@ -44,8 +54,8 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       () => const AboutUs(),
                     );
                   },
-                  child: const Text(
-                    "About Us",
+                  child: const AppText(
+                    text: "About Us",
                   ),
                 ),
                 PopupMenuItem(
@@ -54,8 +64,8 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       () => const ContactUs(),
                     );
                   },
-                  child: const Text(
-                    "Contact Us",
+                  child: const AppText(
+                    text: "Contact Us",
                   ),
                 ),
               ];
@@ -106,16 +116,12 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      const Text(
-                        "How to Download Pinterest Videos or Images ?",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      const AppText(
+                        text: "How to Download Pinterest Videos or Images ?",
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      AppSpacing.heightspace10,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -127,9 +133,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                                   "assets/Image0.jpeg",
                                   width: MediaQuery.of(context).size.width * 0.3,
                                 ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  "1. Copy Link from Pinterest",
+                                AppSpacing.heightspace5,
+                                const AppText(
+                                  text: "1. Copy Link from Pinterest",
                                 ),
                               ],
                             ),
@@ -142,9 +148,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                                   "assets/Image1.jpeg",
                                   width: MediaQuery.of(context).size.width * 0.3,
                                 ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  "2. Paste the copied Link",
+                                AppSpacing.heightspace5,
+                                const AppText(
+                                  text: "2. Paste the copied Link",
                                 ),
                               ],
                             ),
@@ -157,9 +163,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                                   "assets/Image0.jpeg",
                                   width: MediaQuery.of(context).size.width * 0.3,
                                 ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  "3. Save File in your Device",
+                                AppSpacing.heightspace5,
+                                const AppText(
+                                  text: "3. Save File in your Device",
                                 ),
                               ],
                             ),
@@ -172,8 +178,8 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
               },
             );
           },
-          child: const Text(
-            "Get Some Help ?",
+          child: const AppText(
+            text: "Get Some Help ?",
           ),
         ),
       ),

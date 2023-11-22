@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pinterest_video_downloader/utils/storage_utils.dart';
+import 'package:pinterest_video_downloader/widgets/app_text.dart';
 import 'package:pinterest_video_downloader/widgets/app_video_player.dart';
 
 class Saved extends StatefulWidget {
@@ -40,7 +41,11 @@ class _SavedState extends State<Saved> {
       );
     } else if (files.isEmpty) {
       return const Center(
-        child: Text("No files found!"),
+        child: AppText(
+          text: "No files found!",
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
       );
     } else {
       return GridView.builder(

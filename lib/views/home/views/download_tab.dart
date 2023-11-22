@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinterest_video_downloader/constants/app_spacing.dart';
 import 'package:pinterest_video_downloader/views/home/controllers/home_controller.dart';
+import 'package:pinterest_video_downloader/widgets/app_text.dart';
 
 class DownloadTab extends StatelessWidget {
   const DownloadTab({
@@ -12,11 +14,9 @@ class DownloadTab extends StatelessWidget {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) {
-        return Column(
+        return ListView(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
+            AppSpacing.heightspace20,
             TextFormField(
               controller: _.url,
               decoration: InputDecoration(
@@ -27,9 +27,7 @@ class DownloadTab extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            AppSpacing.heightspace20,
             ElevatedButton(
               onPressed: _.isLoading
                   ? () {}
@@ -43,106 +41,81 @@ class DownloadTab extends StatelessWidget {
                         color: Colors.white,
                       ),
                     )
-                  : const Text(
-                      "Download",
+                  : const AppText(
+                      text: "Download",
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
             ),
-            const SizedBox(
-              height: 20,
+            AppSpacing.heightspace20,
+            AppSpacing.heightspace20,
+            AppText(
+              text: "Frequently Asked Questions (FAQs)",
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
-            ListView(
-              shrinkWrap: true,
-              children: const [
-                SizedBox(
-                  height: 20,
+            ExpansionTile(
+              title: AppText(
+                text: "1. Is Pinterest Downloader safe to use?",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              children: [
+                AppText(
+                  text: "Pinterest Downloader prioritises user safety and employs security measures to protect your data.",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
                 ),
-                Text(
-                  "Frequently Asked Questions (FAQs)",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                ExpansionTile(
-                  title: Text(
-                    "1. Is Pinterest Downloader safe to use?",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  children: [
-                    Text(
-                      "Pinterest Downloader prioritises user safety and employs security measures to protect your data.",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    "2. What formats are supported for video downloads?",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  children: [
-                    Text(
-                      "Pinterest Downloader supports MP4 format for high-definition video downloads.",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    "3. Do I need to register or pay to use Pinterest Downloader?",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  children: [
-                    Text(
-                      "No, the tool is free, and no registration or fees are required.",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    "4. Can I download content on mobile devices?",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  children: [
-                    Text(
-                      "Pinterest Downloader is compatible with computers, tablets, and mobile devices.",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                AppSpacing.heightspace10,
               ],
             ),
-            const SizedBox(
-              height: 0,
+            ExpansionTile(
+              title: AppText(
+                text: "2. What formats are supported for video downloads?",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              children: [
+                AppText(
+                  text: "Pinterest Downloader supports MP4 format for high-definition video downloads.",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+                AppSpacing.heightspace10,
+              ],
             ),
+            ExpansionTile(
+              title: AppText(
+                text: "3. Do I need to register or pay to use Pinterest Downloader?",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              children: [
+                AppText(
+                  text: "No, the tool is free, and no registration or fees are required.",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+                AppSpacing.heightspace10,
+              ],
+            ),
+            ExpansionTile(
+              title: AppText(
+                text: "4. Can I download content on mobile devices?",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              children: [
+                AppText(
+                  text: "Pinterest Downloader is compatible with computers, tablets, and mobile devices.",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+                AppSpacing.heightspace10,
+              ],
+            ),
+            AppSpacing.heightspace20,
           ],
         );
       },
