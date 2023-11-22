@@ -24,6 +24,8 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
 
   getDeviceInfo() async {
     AndroidDeviceInfo androidDeviceInfo = await _deviceInfoPlugin.androidInfo;
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // print(token);
     print(androidDeviceInfo.id);
   }
 
