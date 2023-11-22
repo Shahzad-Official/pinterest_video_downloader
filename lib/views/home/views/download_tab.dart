@@ -50,12 +50,12 @@ class DownloadTab extends StatelessWidget {
             ),
             AppSpacing.heightspace20,
             AppSpacing.heightspace20,
-            AppText(
+            const AppText(
               text: "Frequently Asked Questions (FAQs)",
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: AppText(
                 text: "1. Is Pinterest Downloader safe to use?",
                 fontSize: 16,
@@ -70,7 +70,7 @@ class DownloadTab extends StatelessWidget {
                 AppSpacing.heightspace10,
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: AppText(
                 text: "2. What formats are supported for video downloads?",
                 fontSize: 16,
@@ -85,7 +85,7 @@ class DownloadTab extends StatelessWidget {
                 AppSpacing.heightspace10,
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: AppText(
                 text: "3. Do I need to register or pay to use Pinterest Downloader?",
                 fontSize: 16,
@@ -100,7 +100,7 @@ class DownloadTab extends StatelessWidget {
                 AppSpacing.heightspace10,
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: AppText(
                 text: "4. Can I download content on mobile devices?",
                 fontSize: 16,

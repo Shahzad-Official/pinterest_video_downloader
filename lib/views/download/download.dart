@@ -32,7 +32,7 @@ class _DownloadState extends State<Download> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppText(
+          title: const AppText(
             text: "Download File",
           ),
         ),
@@ -82,7 +82,7 @@ class _DownloadState extends State<Download> {
                                   onPressed: () {
                                     _.cancelDownload();
                                   },
-                                  icon: Icon(Icons.close),
+                                  icon: const Icon(Icons.close),
                                 ),
                               ],
                             ),
@@ -98,7 +98,7 @@ class _DownloadState extends State<Download> {
                               : () async {
                                   await _.downloadVideo(context);
                                 },
-                          child: AppText(
+                          child: const AppText(
                             text: "Download Video",
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -110,7 +110,7 @@ class _DownloadState extends State<Download> {
                         : () async {
                             await _.downloadImage(context);
                           },
-                    child: AppText(
+                    child: const AppText(
                       text: "Download Thumbnail",
                       fontSize: 15,
                       fontWeight: FontWeight.w600,

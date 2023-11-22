@@ -72,8 +72,6 @@ class HomeController extends GetxController {
 
   CancelToken cancelToken = CancelToken();
   cancelDownload() {
-    print("download cancel");
-
     cancelToken.cancel();
     isDownloading = false;
     update();
