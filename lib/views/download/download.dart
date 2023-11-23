@@ -40,83 +40,91 @@ class _DownloadState extends State<Download> {
           child: GetBuilder<HomeController>(
             init: HomeController(),
             builder: (_) {
-              return Column(
-                children: [
-                  AppSpacing.heightspace10,
-                  Center(
-                    child: AppText(
-                      text: _.data.title.toString(),
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: Column(
+                  children: [
+                    AppSpacing.heightspace10,
+                    Center(
+                      child: AppText(
+                        text: _.data.title.toString(),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  AppSpacing.heightspace10,
-                  _.data.video == ""
-                      ? Expanded(
-                          child: Image.network(
-                            _.data.thumbnail!.url.toString(),
-                          ),
-                        )
-                      : Expanded(
-                          child: AppVideoPlayer(
-                            url: _.data.video.toString(),
-                          ),
-                        ),
-                  AppSpacing.heightspace10,
-                  _.isDownloading
-                      ? Column(
-                          children: [
-                            AppText(
-                              text: "Downloading  ${(_.progress * 100).toStringAsFixed(0)}%",
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
+                    AppSpacing.heightspace10,
+                    _.data.video == ""
+                        ? Expanded(
+                            child: Image.network(
+                              _.data.thumbnail!.url.toString(),
                             ),
-                            AppSpacing.heightspace5,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: LinearProgressIndicator(
-                                    value: _.progress,
-                                    minHeight: 7,
+                          )
+                        : Expanded(
+                            child: AppVideoPlayer(
+                              url: _.data.video.toString(),
+                            ),
+                          ),
+                    AppSpacing.heightspace10,
+                    _.isDownloading
+                        ? Column(
+                            children: [
+                              AppText(
+                                text: "Downloading  ${(_.progress * 100).toStringAsFixed(0)}%",
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              AppSpacing.heightspace5,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: LinearProgressIndicator(
+                                      value: _.progress,
+                                      minHeight: 7,
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    _.cancelDownload();
+                                  IconButton(
+                                    onPressed: () {
+                                      _.cancelDownload();
+                                    },
+                                    icon: const Icon(Icons.close),
+                                  ),
+                                ],
+                              ),
+                              AppSpacing.heightspace10,
+                            ],
+                          )
+                        : const SizedBox(),
+                    _.data.video == ""
+                        ? const SizedBox()
+                        : ElevatedButton(
+                            onPressed: _.isDownloading
+                                ? () {}
+                                : () async {
+                                    await _.downloadVideo(context);
                                   },
-                                  icon: const Icon(Icons.close),
-                                ),
-                              ],
+                            child: const AppText(
+                              text: "Download Video",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
                             ),
-                            AppSpacing.heightspace10,
-                          ],
-                        )
-                      : const SizedBox(),
-                  _.data.video == ""
-                      ? const SizedBox()
-                      : ElevatedButton(
-                          onPressed: _.isDownloading
-                              ? () {}
-                              : () async {
-                                  await _.downloadVideo(context);
-                                },
-                          child: const AppText(
-                            text: "Download Video",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                  ElevatedButton(
-                    onPressed: _.isDownloading
-                        ? () {}
-                        : () async {
-                            await _.downloadImage(context);
-                          },
-                    child: const AppText(
-                      text: "Download Thumbnail",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
+                    ElevatedButton(
+                      onPressed: _.isDownloading
+                          ? () {}
+                          : () async {
+                              await _.downloadImage(context);
+                            },
+                      child: const AppText(
+                        text: "Download Thumbnail",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),

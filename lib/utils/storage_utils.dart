@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class StorageUtils {
-  static String path = "/storage/emulated/0/PinterestDownloader/";
+  static String path = "/storage/emulated/0/Pinterest Downloads/";
   static Future<Directory> createFolder() async {
     Directory directory = Directory(path);
     bool isGranted = await Permission.manageExternalStorage.isGranted;
